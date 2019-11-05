@@ -28,7 +28,7 @@
 
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
-
+#include "nixie.h"
 /* USER CODE END Includes */
 
 /* Private typedef -----------------------------------------------------------*/
@@ -98,13 +98,14 @@ int main(void)
   MX_TIM14_Init();
   MX_TIM15_Init();
   /* USER CODE BEGIN 2 */
-
+  nixie_init();
   /* USER CODE END 2 */
 
   /* Infinite loop */
   /* USER CODE BEGIN WHILE */
   while (1)
   {
+	  boost_op();
     /* USER CODE END WHILE */
 
     /* USER CODE BEGIN 3 */

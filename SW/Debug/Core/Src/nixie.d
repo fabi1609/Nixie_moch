@@ -1,4 +1,4 @@
-Core/Src/boost.o: ../Core/Src/boost.c ../Core/Inc/boost.h \
+Core/Src/nixie.o: ../Core/Src/nixie.c ../Core/Inc/nixie.h \
  ../Drivers/STM32G0xx_HAL_Driver/Inc/stm32g0xx_hal.h \
  ../Core/Inc/stm32g0xx_hal_conf.h \
  ../Drivers/STM32G0xx_HAL_Driver/Inc/stm32g0xx_hal_rcc.h \
@@ -36,7 +36,7 @@ Core/Src/boost.o: ../Core/Src/boost.c ../Core/Inc/boost.h \
  ../Core/Inc/comp.h ../Core/Inc/main.h ../Core/Inc/tim.h \
  ../Core/Inc/dac.h
 
-../Core/Inc/boost.h:
+../Core/Inc/nixie.h:
 
 ../Drivers/STM32G0xx_HAL_Driver/Inc/stm32g0xx_hal.h:
 

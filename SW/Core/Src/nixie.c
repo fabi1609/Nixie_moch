@@ -1,18 +1,78 @@
 /*
- * nixie_display.c
+ * nixie.c
  *
  *  Created on: Oct 29, 2019
  *      Author: Fabian
  */
 
-#include "nixie_display.h"
-#include "main.h"
+#include "nixie.h"
+#include <stdbool.h>
+#include "comp.h"
+#include "tim.h"
+#include "dac.h"
 
+volatile uint32_t dac_value = 0;
 volatile uint8_t digit=0;
+volatile uint8_t hours=0;
+volatile uint8_t minutes=0;
+volatile uint8_t seconds=0;
+volatile bool poll_comp = true;
 
-//TODO Timer Interrupt für Multiplex
+static void nixie_display();
+static void nixie_display_reset_all();
+static void nixie_display_set_anode(uint8_t n);
 
-void nixie_display(uint8_t hours, uint8_t minutes, uint8_t seconds)
+void HAL_TIM_PeriodElapsedCallback (TIM_HandleTypeDef *htim)
+{
+	if(htim->Instance == htim2.Instance)
+	{
+		//stop pwm pulse and set flag to poll the feedback comparator of boost converter
+		HAL_TIM_PWM_Stop(htim, TIM_CHANNEL_1);
+		poll_comp = true;
+	}
+	else if(htim->Instance == htim14.Instance)
+	{
+		//perform multiplex for nixie tubes
+		nixie_display();
+
+		//ramp up feedback voltage for boost converter
+		if(dac_value < DAC_TARGET)
+			dac_value++;
+	}
+}
+
+void nixie_init()
+{
+	//Start DAC for feedback voltage of boost converter
+	HAL_DAC_Start(&hdac1, DAC_CHANNEL_1);
+	HAL_DAC_SetValue(&hdac1, DAC_CHANNEL_1, DAC_ALIGN_12B_R, dac_value);
+	//Start period elapsed event of boost converter pulse
+	__HAL_TIM_ENABLE_IT(&htim2, TIM_IT_UPDATE);
+	//Start timer and period elapsed event of multiplex timer for nixie tubes
+	HAL_TIM_Base_Start_IT(&htim14);
+}
+
+void boost_op()
+{
+	if(poll_comp)
+	{
+		//If voltage lower than feedback, activate next pulse of boost converter and switch off polling the comparator
+		if(HAL_COMP_GetOutputLevel(&hcomp2)==COMP_OUTPUT_LEVEL_LOW)
+		{
+			HAL_TIM_PWM_Start(&htim2, TIM_CHANNEL_1);
+			poll_comp = false;
+		}
+	}
+}
+
+void set_time_display(uint8_t h, uint8_t m, uint8_t s)
+{
+	hours = h;
+	minutes = m;
+	seconds = s;
+}
+
+static void nixie_display()
 {
 	nixie_display_reset_all();
 	switch(digit)
