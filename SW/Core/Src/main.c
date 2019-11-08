@@ -106,6 +106,7 @@ int main(void)
   while (1)
   {
 	  boost_op();
+
     /* USER CODE END WHILE */
 
     /* USER CODE BEGIN 3 */
