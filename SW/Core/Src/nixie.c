@@ -26,8 +26,7 @@ void HAL_TIM_PeriodElapsedCallback (TIM_HandleTypeDef *htim)
 {
 	if(htim->Instance == htim2.Instance)
 	{
-		//stop pwm pulse and set flag to poll the feedback comparator of boost converter
-		HAL_TIM_PWM_Stop(htim, TIM_CHANNEL_1);
+		//End of boost converter pulse. Set flag to poll the feedback comparator of boost converter again
 		poll_comp = true;
 	}
 	else if(htim->Instance == htim14.Instance)
@@ -46,8 +45,8 @@ void nixie_init()
 	//Start DAC for feedback voltage of boost converter
 	HAL_DAC_Start(&hdac1, DAC_CHANNEL_1);
 	HAL_DAC_SetValue(&hdac1, DAC_CHANNEL_1, DAC_ALIGN_12B_R, dac_value);
-	//Start period elapsed event of boost converter pulse
-	__HAL_TIM_ENABLE_IT(&htim2, TIM_IT_UPDATE);
+	//Enable one pulse mode for boost converter. Trigger by software trough HAL_TIM_Base_Start
+	HAL_TIM_OnePulse_Start(&htim2, TIM_CHANNEL_1);
 	//Start timer and period elapsed event of multiplex timer for nixie tubes
 	HAL_TIM_Base_Start_IT(&htim14);
 }
@@ -57,10 +56,10 @@ void boost_op()
 	if(poll_comp)
 	{
 		//If voltage lower than feedback, activate next pulse of boost converter and switch off polling the comparator
-		if(HAL_COMP_GetOutputLevel(&hcomp2)==COMP_OUTPUT_LEVEL_LOW)
+		if(HAL_COMP_GetOutputLevel(&hcomp2) == COMP_OUTPUT_LEVEL_LOW)
 		{
-			HAL_TIM_PWM_Start(&htim2, TIM_CHANNEL_1);
 			poll_comp = false;
+			HAL_TIM_Base_Start_IT(&htim2);
 		}
 	}
 }
