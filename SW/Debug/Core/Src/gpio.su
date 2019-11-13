@@ -1,1 +1,3 @@
-gpio.c:40:6:MX_GPIO_Init	56	static
+stm32g0xx_ll_gpio.h:882:22:LL_GPIO_ResetOutputPin	16	static
+stm32g0xx_ll_bus.h:1000:22:LL_IOP_GRP1_EnableClock	24	static
+gpio.c:40:6:MX_GPIO_Init	32	static

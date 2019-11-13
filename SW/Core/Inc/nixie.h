@@ -12,7 +12,7 @@
 #include "stm32g0xx_ll_system.h"
 
 #define DAC_TARGET 2600 //2940 approx. 160V    4095 -> 223V
-
+//#define DAC_TARGET 0
 void nixie_init();
 void boost_op();
 

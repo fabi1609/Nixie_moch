@@ -1,6 +1,0 @@
-boost.c:21:6:HAL_TIM_PeriodElapsedCallback	16	static
-boost.c:35:6:boost_init	8	static
-boost.c:42:6:boost_op	8	static
-boost.c:55:13:nixie_display	8	static
-boost.c:83:13:nixie_display_reset_all	8	static
-boost.c:101:13:nixie_display_set_anode	16	static
