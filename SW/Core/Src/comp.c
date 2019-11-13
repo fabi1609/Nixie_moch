@@ -35,7 +35,7 @@ void MX_COMP2_Init(void)
   hcomp2.Init.InputMinus = COMP_INPUT_MINUS_DAC1_CH1;
   hcomp2.Init.OutputPol = COMP_OUTPUTPOL_NONINVERTED;
   hcomp2.Init.WindowOutput = COMP_WINDOWOUTPUT_EACH_COMP;
-  hcomp2.Init.Hysteresis = COMP_HYSTERESIS_LOW;
+  hcomp2.Init.Hysteresis = COMP_HYSTERESIS_NONE;
   hcomp2.Init.BlankingSrce = COMP_BLANKINGSRC_NONE;
   hcomp2.Init.Mode = COMP_POWERMODE_HIGHSPEED;
   hcomp2.Init.WindowMode = COMP_WINDOWMODE_DISABLE;

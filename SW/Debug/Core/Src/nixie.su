@@ -1,7 +1,7 @@
 nixie.c:25:6:HAL_TIM_PeriodElapsedCallback	16	static
-nixie.c:43:6:nixie_init	8	static
-nixie.c:54:6:boost_op	8	static
-nixie.c:67:6:set_time_display	24	static
-nixie.c:74:13:nixie_display	8	static
-nixie.c:102:13:nixie_display_reset_all	8	static
-nixie.c:120:13:nixie_display_set_anode	16	static
+nixie.c:46:6:nixie_init	8	static
+nixie.c:59:6:boost_op	8	static
+nixie.c:76:6:set_time_display	24	static
+nixie.c:83:13:nixie_display	8	static
+nixie.c:115:13:nixie_display_reset_all	8	static
+nixie.c:133:13:nixie_display_set_anode	16	static
