@@ -43,7 +43,7 @@ Core/Src/nixie.o: ../Core/Src/nixie.c ../Core/Inc/nixie.h \
  ../Drivers/STM32G0xx_HAL_Driver/Inc/stm32g0xx_ll_pwr.h \
  ../Drivers/STM32G0xx_HAL_Driver/Inc/stm32g0xx_ll_dma.h \
  ../Drivers/STM32G0xx_HAL_Driver/Inc/stm32g0xx_ll_dmamux.h \
- ../Core/Inc/tim.h ../Core/Inc/dac.h
+ ../Core/Inc/tim.h ../Core/Inc/dac.h ../Core/Inc/rtc.h ../Core/Inc/gpio.h
 
 ../Core/Inc/nixie.h:
 
@@ -140,3 +140,7 @@ Core/Src/nixie.o: ../Core/Src/nixie.c ../Core/Inc/nixie.h \
 ../Core/Inc/tim.h:
 
 ../Core/Inc/dac.h:
+
+../Core/Inc/rtc.h:
+
+../Core/Inc/gpio.h:

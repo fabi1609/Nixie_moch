@@ -1,3 +1,4 @@
+"Core/Src/clock.o"
 "Core/Src/comp.o"
 "Core/Src/dac.o"
 "Core/Src/gpio.o"

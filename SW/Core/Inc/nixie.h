@@ -15,5 +15,6 @@
 //#define DAC_TARGET 0
 void nixie_init();
 void boost_op();
+void nixie_set_time(uint8_t h, uint8_t m, uint8_t s);
 
 #endif /* INC_NIXIE_H_ */
