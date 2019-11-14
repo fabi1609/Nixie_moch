@@ -32,10 +32,10 @@ void MX_COMP2_Init(void)
 
   hcomp2.Instance = COMP2;
   hcomp2.Init.InputPlus = COMP_INPUT_PLUS_IO3;
-  hcomp2.Init.InputMinus = COMP_INPUT_MINUS_DAC1_CH1;
+  hcomp2.Init.InputMinus = COMP_INPUT_MINUS_DAC1_CH2;
   hcomp2.Init.OutputPol = COMP_OUTPUTPOL_NONINVERTED;
   hcomp2.Init.WindowOutput = COMP_WINDOWOUTPUT_EACH_COMP;
-  hcomp2.Init.Hysteresis = COMP_HYSTERESIS_LOW;
+  hcomp2.Init.Hysteresis = COMP_HYSTERESIS_NONE;
   hcomp2.Init.BlankingSrce = COMP_BLANKINGSRC_NONE;
   hcomp2.Init.Mode = COMP_POWERMODE_HIGHSPEED;
   hcomp2.Init.WindowMode = COMP_WINDOWMODE_DISABLE;
@@ -61,10 +61,10 @@ void HAL_COMP_MspInit(COMP_HandleTypeDef* compHandle)
     /**COMP2 GPIO Configuration    
     PA3     ------> COMP2_INP 
     */
-    GPIO_InitStruct.Pin = FB_170V_Pin;
+    GPIO_InitStruct.Pin = GPIO_PIN_3;
     GPIO_InitStruct.Mode = GPIO_MODE_ANALOG;
     GPIO_InitStruct.Pull = GPIO_NOPULL;
-    HAL_GPIO_Init(FB_170V_GPIO_Port, &GPIO_InitStruct);
+    HAL_GPIO_Init(GPIOA, &GPIO_InitStruct);
 
   /* USER CODE BEGIN COMP2_MspInit 1 */
 
@@ -84,7 +84,7 @@ void HAL_COMP_MspDeInit(COMP_HandleTypeDef* compHandle)
     /**COMP2 GPIO Configuration    
     PA3     ------> COMP2_INP 
     */
-    HAL_GPIO_DeInit(FB_170V_GPIO_Port, FB_170V_Pin);
+    HAL_GPIO_DeInit(GPIOA, GPIO_PIN_3);
 
   /* USER CODE BEGIN COMP2_MspDeInit 1 */
 
