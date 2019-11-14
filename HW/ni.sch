@@ -14444,18 +14444,6 @@ WR-COM_USB_Micro Type B_Vertical_THT Micro Type B Vertical THT- Tape &amp; Reel 
 <label x="134.62" y="137.16" size="1.778" layer="95" rot="R90" align="bottom-right"/>
 </segment>
 </net>
-<net name="N$18" class="0">
-<segment>
-<pinref part="IC2" gate="G$1" pin="VDD/VDDA"/>
-<wire x1="101.6" y1="101.6" x2="68.58" y2="101.6" width="0.1524" layer="91"/>
-<pinref part="C11" gate="G$1" pin="1"/>
-<wire x1="68.58" y1="101.6" x2="60.96" y2="101.6" width="0.1524" layer="91"/>
-<wire x1="60.96" y1="101.6" x2="60.96" y2="96.52" width="0.1524" layer="91"/>
-<pinref part="C12" gate="G$1" pin="1"/>
-<wire x1="68.58" y1="96.52" x2="68.58" y2="101.6" width="0.1524" layer="91"/>
-<junction x="68.58" y="101.6"/>
-</segment>
-</net>
 <net name="NRST" class="0">
 <segment>
 <pinref part="IC2" gate="G$1" pin="PF2-NRST"/>
@@ -14473,8 +14461,9 @@ WR-COM_USB_Micro Type B_Vertical_THT Micro Type B Vertical THT- Tape &amp; Reel 
 <net name="+3V3" class="0">
 <segment>
 <pinref part="IC2" gate="G$1" pin="VREF+"/>
-<wire x1="101.6" y1="104.14" x2="53.34" y2="104.14" width="0.1524" layer="91"/>
+<wire x1="101.6" y1="104.14" x2="60.96" y2="104.14" width="0.1524" layer="91"/>
 <pinref part="C9" gate="G$1" pin="1"/>
+<wire x1="60.96" y1="104.14" x2="53.34" y2="104.14" width="0.1524" layer="91"/>
 <wire x1="53.34" y1="104.14" x2="45.72" y2="104.14" width="0.1524" layer="91"/>
 <wire x1="45.72" y1="104.14" x2="45.72" y2="96.52" width="0.1524" layer="91"/>
 <pinref part="C10" gate="G$1" pin="1"/>
@@ -14483,6 +14472,17 @@ WR-COM_USB_Micro Type B_Vertical_THT Micro Type B Vertical THT- Tape &amp; Reel 
 <pinref part="+3V1" gate="G$1" pin="+3V3"/>
 <wire x1="45.72" y1="114.3" x2="45.72" y2="104.14" width="0.1524" layer="91"/>
 <junction x="45.72" y="104.14"/>
+<pinref part="IC2" gate="G$1" pin="VDD/VDDA"/>
+<wire x1="101.6" y1="101.6" x2="68.58" y2="101.6" width="0.1524" layer="91"/>
+<pinref part="C11" gate="G$1" pin="1"/>
+<wire x1="68.58" y1="101.6" x2="60.96" y2="101.6" width="0.1524" layer="91"/>
+<wire x1="60.96" y1="101.6" x2="60.96" y2="96.52" width="0.1524" layer="91"/>
+<pinref part="C12" gate="G$1" pin="1"/>
+<wire x1="68.58" y1="96.52" x2="68.58" y2="101.6" width="0.1524" layer="91"/>
+<junction x="68.58" y="101.6"/>
+<wire x1="60.96" y1="101.6" x2="60.96" y2="104.14" width="0.1524" layer="91"/>
+<junction x="60.96" y="101.6"/>
+<junction x="60.96" y="104.14"/>
 </segment>
 <segment>
 <pinref part="IC3" gate="G$1" pin="VOUT"/>
