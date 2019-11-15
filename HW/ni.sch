@@ -205,22 +205,22 @@
 <package name="IN-12" urn="urn:adsk.eagle:footprint:1509183/2" locally_modified="yes" library_version="4" library_locally_modified="yes">
 <circle x="0" y="0" radius="2.54" width="0.127" layer="21"/>
 <circle x="0" y="0" radius="3.81" width="0.127" layer="21"/>
-<wire x1="-10.922" y1="8.636" x2="-10.922" y2="-8.636" width="0.127" layer="21"/>
-<wire x1="10.922" y1="8.636" x2="10.922" y2="-8.636" width="0.127" layer="21"/>
-<wire x1="-11.43" y1="8.89" x2="11.43" y2="8.89" width="0.127" layer="21" curve="-93.273154"/>
-<wire x1="-11.43" y1="-8.89" x2="11.43" y2="-8.89" width="0.127" layer="21" curve="93.273154"/>
-<pad name="5" x="4" y="8" drill="1.9" diameter="2.2" rot="R62"/>
-<pad name="4" x="5.75" y="4.5" drill="1.9" diameter="2.2" rot="R26"/>
-<pad name="3" x="5.75" y="0" drill="1.9" diameter="2.2" rot="R20"/>
-<pad name="2" x="5.75" y="-4.5" drill="1.9" diameter="2.2" rot="R334"/>
-<pad name="1" x="4" y="-8" drill="1.9" diameter="2.2" rot="R298"/>
-<pad name="12" x="0" y="-9" drill="1.9" diameter="2.2" rot="R270"/>
-<pad name="11" x="-4" y="-8" drill="1.9" diameter="2.2" rot="R242"/>
-<pad name="10" x="-5.75" y="-4.5" drill="1.9" diameter="2.2" rot="R206"/>
-<pad name="9" x="-5.75" y="0" drill="1.9" diameter="2.2" rot="R200"/>
-<pad name="8" x="-5.75" y="4.5" drill="1.9" diameter="2.2" rot="R154"/>
-<pad name="7" x="-4" y="8" drill="1.9" diameter="2.2" rot="R118"/>
-<pad name="6" x="0" y="9" drill="1.9" diameter="2.2" rot="R90"/>
+<wire x1="-8.382" y1="8.636" x2="-8.382" y2="-8.636" width="0.127" layer="21"/>
+<wire x1="8.382" y1="8.636" x2="8.382" y2="-8.636" width="0.127" layer="21"/>
+<wire x1="-8.89" y1="10.16" x2="8.89" y2="10.16" width="0.127" layer="21" curve="-93.273154"/>
+<wire x1="-8.89" y1="-10.16" x2="8.89" y2="-10.16" width="0.127" layer="21" curve="93.273154"/>
+<pad name="5" x="4" y="8" drill="1.3" diameter="2.2" rot="R62"/>
+<pad name="4" x="5.75" y="4.5" drill="1.3" diameter="2.2" rot="R26"/>
+<pad name="3" x="5.75" y="0" drill="1.3" diameter="2.2" rot="R20"/>
+<pad name="2" x="5.75" y="-4.5" drill="1.3" diameter="2.2" rot="R334"/>
+<pad name="1" x="4" y="-8" drill="1.3" diameter="2.2" rot="R298"/>
+<pad name="12" x="0" y="-9" drill="1.3" diameter="2.2" rot="R270"/>
+<pad name="11" x="-4" y="-8" drill="1.3" diameter="2.2" rot="R242"/>
+<pad name="10" x="-5.75" y="-4.5" drill="1.3" diameter="2.2" rot="R206"/>
+<pad name="9" x="-5.75" y="0" drill="1.3" diameter="2.2" rot="R200"/>
+<pad name="8" x="-5.75" y="4.5" drill="1.3" diameter="2.2" rot="R154"/>
+<pad name="7" x="-4" y="8" drill="1.3" diameter="2.2" rot="R118"/>
+<pad name="6" x="0" y="9" drill="1.3" diameter="2.2" rot="R90"/>
 <text x="-3.175" y="3.81" size="1.6764" layer="21">IN-12</text>
 <text x="-2.54" y="-4.445" size="1.27" layer="25">&gt;Name</text>
 <text x="-1.27" y="-6.35" size="0.8128" layer="27">&gt;Value</text>
@@ -11426,8 +11426,7 @@ Source: http://www.mouser.com/ds/2/392/products_18-2245.pdf</description>
 </packages>
 <packages3d>
 <package3d name="QFN50P700X700X60-49N" urn="urn:adsk.eagle:package:13357856/2" type="model" library_version="2">
-<description>&lt;b&gt;STM32G071CBU6-1&lt;/b&gt;&lt;br&gt;
-</description>
+<description>&lt;b&gt;STM32G071CBU6-1&lt;/b&gt;&lt;br&gt;</description>
 <packageinstances>
 <packageinstance name="QFN50P700X700X60-49N"/>
 </packageinstances>
@@ -12443,8 +12442,7 @@ Details see: &lt;a href="http://katalog.we-online.de/en/em/SLTV_10X2_5_THT"&gt;h
 </packages>
 <packages3d>
 <package3d name="SOT95P280X145-5N" urn="urn:adsk.eagle:package:13447309/2" type="model" library_version="2">
-<description>&lt;b&gt;MIC5504-3.3YM5-TR-1&lt;/b&gt;&lt;br&gt;
-</description>
+<description>&lt;b&gt;MIC5504-3.3YM5-TR-1&lt;/b&gt;&lt;br&gt;</description>
 <packageinstances>
 <packageinstance name="SOT95P280X145-5N"/>
 </packageinstances>
@@ -12856,9 +12854,9 @@ WR-COM_USB_Micro Type B_Vertical_THT Micro Type B Vertical THT- Tape &amp; Reel 
 </classes>
 <parts>
 <part name="N4" library="Nixie" library_urn="urn:adsk.eagle:library:1509144" deviceset="IN-12" device="-V3" package3d_urn="urn:adsk.eagle:package:1509184/3"/>
-<part name="N3" library="Nixie" library_urn="urn:adsk.eagle:library:1509144" deviceset="IN-12" device="-V3" package3d_urn="urn:adsk.eagle:package:1509184/3" override_package3d_urn="urn:adsk.eagle:package:1509184/9" override_package_urn="urn:adsk.eagle:footprint:1509183/5"/>
+<part name="N3" library="Nixie" library_urn="urn:adsk.eagle:library:1509144" deviceset="IN-12" device="-V3" package3d_urn="urn:adsk.eagle:package:1509184/3" override_package3d_urn="urn:adsk.eagle:package:1509184/9" override_package_urn="urn:adsk.eagle:footprint:1509183/5" override_locally_modified="yes"/>
 <part name="N2" library="Nixie" library_urn="urn:adsk.eagle:library:1509144" deviceset="IN-12" device="-V3" package3d_urn="urn:adsk.eagle:package:1509184/3"/>
-<part name="N1" library="Nixie" library_urn="urn:adsk.eagle:library:1509144" deviceset="IN-12" device="-V3" package3d_urn="urn:adsk.eagle:package:1509184/3" override_package3d_urn="urn:adsk.eagle:package:1509184/6" override_package_urn="urn:adsk.eagle:footprint:1509183/3"/>
+<part name="N1" library="Nixie" library_urn="urn:adsk.eagle:library:1509144" deviceset="IN-12" device="-V3" package3d_urn="urn:adsk.eagle:package:1509184/3" override_package3d_urn="urn:adsk.eagle:package:1509184/6" override_package_urn="urn:adsk.eagle:footprint:1509183/3" override_locally_modified="yes"/>
 <part name="N6" library="Nixie" library_urn="urn:adsk.eagle:library:1509144" deviceset="INS-1" device="" package3d_urn="urn:adsk.eagle:package:1509158/1"/>
 <part name="N5" library="Nixie" library_urn="urn:adsk.eagle:library:1509144" deviceset="INS-1" device="" package3d_urn="urn:adsk.eagle:package:1509158/1"/>
 <part name="GND1" library="supply1" library_urn="urn:adsk.eagle:library:371" deviceset="GND" device=""/>
@@ -14659,10 +14657,33 @@ WR-COM_USB_Micro Type B_Vertical_THT Micro Type B Vertical THT- Tape &amp; Reel 
 </net>
 </nets>
 </sheet>
+<sheet>
+<plain>
+<text x="0" y="0" size="1.778" layer="91">TODO:
+Programmerleiste abändern
+Montagelöcher
+Zusätzliche Taster hinzufügen
+
+V1.1 change log:
+3.3V Versorgung richtig angeschlossen
+Löcher für Röhren kleiner
+Bestückungsdruck der Röhren angepasst</text>
+</plain>
+<instances>
+</instances>
+<busses>
+</busses>
+<nets>
+</nets>
+</sheet>
 </sheets>
 </schematic>
 </drawing>
 <compatibility>
+<note version="6.3" minversion="6.2.2" severity="warning">
+Since Version 6.2.2 text objects can contain more than one line,
+which will not be processed correctly with this version.
+</note>
 <note version="8.2" severity="warning">
 Since Version 8.2, EAGLE supports online libraries. The ids
 of those online libraries will not be understood (or retained)
