@@ -1,8 +1,0 @@
-stm32g0xx_ll_gpio.h:487:22:LL_GPIO_SetPinPull	24	static
-nixie.c:27:6:HAL_TIM_PeriodElapsedCallback	16	static
-nixie.c:48:6:nixie_init	8	static
-nixie.c:62:6:boost_op	8	static
-nixie.c:75:6:nixie_set_time	24	static
-nixie.c:82:13:nixie_display	8	static
-nixie.c:125:13:nixie_display_reset_all	8	static
-nixie.c:132:13:nixie_display_set_anode	16	static
