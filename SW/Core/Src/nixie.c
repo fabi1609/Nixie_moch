@@ -11,7 +11,6 @@
 #include "tim.h"
 #include "dac.h"
 #include "rtc.h"
-#include "gpio.h"
 
 volatile uint32_t dac_value = 0;
 volatile uint8_t digit=0;
@@ -43,6 +42,22 @@ void HAL_TIM_PeriodElapsedCallback (TIM_HandleTypeDef *htim)
 			HAL_DAC_SetValue(&hdac1, DAC_CHANNEL_2, DAC_ALIGN_12B_R, dac_value);
 		}
 	}
+	//XXX For debug
+	else if(htim->Instance == htim16.Instance)
+	{
+		if(minutes < 59)
+			minutes++;
+		else
+			minutes = 0;
+		if(seconds < 59)
+			seconds++;
+		else
+			seconds = 0;
+		if(hours < 24)
+			hours++;
+		else hours = 0;
+	}
+	//DEBUG END
 }
 
 void nixie_init()
@@ -57,6 +72,10 @@ void nixie_init()
 	__HAL_TIM_ENABLE_IT(&htim2, TIM_IT_UPDATE);
 	//Start timer and period elapsed event of multiplex timer for nixie tubes
 	HAL_TIM_Base_Start_IT(&htim14);
+
+	//XXX For debug 1s interrupt
+	HAL_TIM_Base_Start_IT(&htim16);
+	//DEBUG END
 }
 
 void boost_op()
@@ -72,7 +91,7 @@ void boost_op()
 	}
 }
 
-void nixie_set_time(uint8_t h, uint8_t m, uint8_t s)
+void set_time_display(uint8_t h, uint8_t m, uint8_t s)
 {
 	hours = h;
 	minutes = m;

@@ -44,7 +44,7 @@ Core/Src/main.o: ../Core/Src/main.c ../Core/Inc/main.h \
  ../Drivers/STM32G0xx_HAL_Driver/Inc/stm32g0xx_ll_dmamux.h \
  ../Core/Inc/comp.h ../Core/Inc/main.h ../Core/Inc/dac.h \
  ../Core/Inc/rtc.h ../Core/Inc/tim.h ../Core/Inc/gpio.h \
- ../Core/Inc/nixie.h ../Core/Inc/clock.h
+ ../Core/Inc/nixie.h
 
 ../Core/Inc/main.h:
 
@@ -147,5 +147,3 @@ Core/Src/main.o: ../Core/Src/main.c ../Core/Inc/main.h \
 ../Core/Inc/gpio.h:
 
 ../Core/Inc/nixie.h:
-
-../Core/Inc/clock.h:

@@ -4,7 +4,6 @@
 
 # Add inputs and outputs from these tool invocations to the build variables 
 C_SRCS += \
-../Core/Src/clock.c \
 ../Core/Src/comp.c \
 ../Core/Src/dac.c \
 ../Core/Src/gpio.c \
@@ -20,7 +19,6 @@ C_SRCS += \
 ../Core/Src/tim.c 
 
 OBJS += \
-./Core/Src/clock.o \
 ./Core/Src/comp.o \
 ./Core/Src/dac.o \
 ./Core/Src/gpio.o \
@@ -36,7 +34,6 @@ OBJS += \
 ./Core/Src/tim.o 
 
 C_DEPS += \
-./Core/Src/clock.d \
 ./Core/Src/comp.d \
 ./Core/Src/dac.d \
 ./Core/Src/gpio.d \
@@ -53,8 +50,6 @@ C_DEPS += \
 
 
 # Each subdirectory must supply rules for building sources it contributes
-Core/Src/clock.o: ../Core/Src/clock.c
-	arm-none-eabi-gcc "$<" -mcpu=cortex-m0plus -std=gnu11 -g3 -DSTM32G071xx -DUSE_HAL_DRIVER -DUSE_FULL_LL_DRIVER -DDEBUG -c -I../Drivers/CMSIS/Include -I../Core/Inc -I../Drivers/CMSIS/Device/ST/STM32G0xx/Include -I../Drivers/STM32G0xx_HAL_Driver/Inc -I../Drivers/STM32G0xx_HAL_Driver/Inc/Legacy -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -MMD -MP -MF"Core/Src/clock.d" -MT"$@" --specs=nano.specs -mfloat-abi=soft -mthumb -o "$@"
 Core/Src/comp.o: ../Core/Src/comp.c
 	arm-none-eabi-gcc "$<" -mcpu=cortex-m0plus -std=gnu11 -g3 -DSTM32G071xx -DUSE_HAL_DRIVER -DUSE_FULL_LL_DRIVER -DDEBUG -c -I../Drivers/CMSIS/Include -I../Core/Inc -I../Drivers/CMSIS/Device/ST/STM32G0xx/Include -I../Drivers/STM32G0xx_HAL_Driver/Inc -I../Drivers/STM32G0xx_HAL_Driver/Inc/Legacy -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -MMD -MP -MF"Core/Src/comp.d" -MT"$@" --specs=nano.specs -mfloat-abi=soft -mthumb -o "$@"
 Core/Src/dac.o: ../Core/Src/dac.c

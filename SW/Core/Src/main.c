@@ -29,7 +29,6 @@
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
 #include "nixie.h"
-#include "clock.h"
 /* USER CODE END Includes */
 
 /* Private typedef -----------------------------------------------------------*/
@@ -94,11 +93,12 @@ int main(void)
   MX_GPIO_Init();
   MX_COMP2_Init();
   MX_DAC1_Init();
+  MX_RTC_Init();
   MX_TIM2_Init();
   MX_TIM14_Init();
   MX_TIM15_Init();
+  MX_TIM16_Init();
   /* USER CODE BEGIN 2 */
-  MY_OWN_MX_RTC_Init();
   nixie_init();
   /* USER CODE END 2 */
 
@@ -107,6 +107,8 @@ int main(void)
   while (1)
   {
 	  boost_op();
+	  //HAL_GPIO_TogglePin(G1_GPIO_Port, G1_Pin);
+	  //HAL_Delay(1000);
     /* USER CODE END WHILE */
 
     /* USER CODE BEGIN 3 */
