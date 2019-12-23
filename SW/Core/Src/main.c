@@ -29,7 +29,6 @@
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
 #include "nixie.h"
-#include "clock.h"
 /* USER CODE END Includes */
 
 /* Private typedef -----------------------------------------------------------*/
@@ -49,7 +48,8 @@
 /* Private variables ---------------------------------------------------------*/
 
 /* USER CODE BEGIN PV */
-
+RTC_TimeTypeDef sTime1;
+RTC_DateTypeDef sDate1;
 /* USER CODE END PV */
 
 /* Private function prototypes -----------------------------------------------*/
@@ -97,10 +97,14 @@ int main(void)
   MX_TIM2_Init();
   MX_TIM14_Init();
   MX_TIM15_Init();
+  MX_TIM1_Init();
   /* USER CODE BEGIN 2 */
   MY_OWN_MX_RTC_Init();
   //MX_RTC_Init();
   nixie_init();
+  //UB_DCF77_Init();
+  DCF77_Status_t status;
+  uint8_t old_sek=99;
   /* USER CODE END 2 */
 
   /* Infinite loop */
@@ -108,6 +112,20 @@ int main(void)
   while (1)
   {
 	  boost_op();
+	  /*status=UB_DCF77_ReadTime();
+	  if(status==DCF77_TIME_OK)
+	  {
+		  if(DCF77_TIME.sek!=old_sek)
+		  {
+			  old_sek=DCF77_TIME.sek;
+			  sTime1.SecondFraction = 0;
+			  sTime1.Seconds = DCF77_TIME.sek;
+			  sTime1.Minutes = DCF77_TIME.min;
+			  sTime1.Hours = DCF77_TIME.std;
+			  HAL_RTC_SetTime(&hrtc, &sTime1, RTC_FORMAT_BIN);
+			  HAL_RTC_SetDate(&hrtc, &sDate1, RTC_FORMAT_BIN);
+		  }
+	  }*/
     /* USER CODE END WHILE */
 
     /* USER CODE BEGIN 3 */
@@ -163,7 +181,9 @@ void SystemClock_Config(void)
   }
   /** Initializes the peripherals clocks 
   */
-  PeriphClkInit.PeriphClockSelection = RCC_PERIPHCLK_RTC|RCC_PERIPHCLK_TIM15;
+  PeriphClkInit.PeriphClockSelection = RCC_PERIPHCLK_RTC|RCC_PERIPHCLK_TIM15
+                              |RCC_PERIPHCLK_TIM1;
+  PeriphClkInit.Tim1ClockSelection = RCC_TIM1CLKSOURCE_PCLK1;
   PeriphClkInit.Tim15ClockSelection = RCC_TIM15CLKSOURCE_PCLK1;
   PeriphClkInit.RTCClockSelection = RCC_RTCCLKSOURCE_LSE;
 

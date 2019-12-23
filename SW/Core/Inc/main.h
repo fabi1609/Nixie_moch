@@ -69,8 +69,9 @@ void Error_Handler(void);
 /* Private defines -----------------------------------------------------------*/
 #define S2_Pin LL_GPIO_PIN_13
 #define S2_GPIO_Port GPIOC
-#define NRST_Pin LL_GPIO_PIN_2
-#define NRST_GPIO_Port GPIOF
+#define DCF77_Pin LL_GPIO_PIN_2
+#define DCF77_GPIO_Port GPIOF
+#define DCF77_EXTI_IRQn EXTI2_3_IRQn
 #define GN1_Pin LL_GPIO_PIN_0
 #define GN1_GPIO_Port GPIOA
 #define GN2_Pin LL_GPIO_PIN_1
