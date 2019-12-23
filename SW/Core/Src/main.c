@@ -60,7 +60,38 @@ void SystemClock_Config(void);
 
 /* Private user code ---------------------------------------------------------*/
 /* USER CODE BEGIN 0 */
+//Called every second
+void HAL_RTC_AlarmAEventCallback(RTC_HandleTypeDef *hrtc)
+{
+	HAL_RTC_GetTime(hrtc, &sTime1, RTC_FORMAT_BIN); // Get Time
+	HAL_RTC_GetDate(hrtc, &sDate1, RTC_FORMAT_BIN); // Get Date
 
+	//Set clock
+	if(!HAL_GPIO_ReadPin(S2_GPIO_Port, S2_Pin))
+	{
+		if(HAL_GPIO_ReadPin(S1_GPIO_Port, S1_Pin))
+		{
+			sTime1.SecondFraction = 0;
+			sTime1.Seconds = 0;
+			if(sTime1.Minutes < 59)
+				sTime1.Minutes = sTime1.Minutes + 1;
+			else
+				sTime1.Minutes = 0;
+		}
+		else
+		{
+			if(sTime1.Hours < 23)
+				sTime1.Hours = sTime1.Hours + 1;
+			else
+				sTime1.Hours = 0;
+		}
+		HAL_RTC_SetTime(hrtc, &sTime1, RTC_FORMAT_BIN);
+		HAL_RTC_SetDate(hrtc, &sDate1, RTC_FORMAT_BIN);
+	}
+
+	//Display Time
+	nixie_set_time(sTime1.Hours, sTime1.Minutes, sTime1.Seconds);
+}
 /* USER CODE END 0 */
 
 /**
@@ -96,13 +127,12 @@ int main(void)
   MX_DAC1_Init();
   MX_TIM2_Init();
   MX_TIM14_Init();
-  MX_TIM15_Init();
-  MX_TIM1_Init();
+  MX_TIM16_Init();
   /* USER CODE BEGIN 2 */
   MY_OWN_MX_RTC_Init();
   //MX_RTC_Init();
   nixie_init();
-  //UB_DCF77_Init();
+  UB_DCF77_Init();
   DCF77_Status_t status;
   uint8_t old_sek=99;
   /* USER CODE END 2 */
@@ -112,7 +142,7 @@ int main(void)
   while (1)
   {
 	  boost_op();
-	  /*status=UB_DCF77_ReadTime();
+	  status=UB_DCF77_ReadTime();
 	  if(status==DCF77_TIME_OK)
 	  {
 		  if(DCF77_TIME.sek!=old_sek)
@@ -125,7 +155,7 @@ int main(void)
 			  HAL_RTC_SetTime(&hrtc, &sTime1, RTC_FORMAT_BIN);
 			  HAL_RTC_SetDate(&hrtc, &sDate1, RTC_FORMAT_BIN);
 		  }
-	  }*/
+	  }
     /* USER CODE END WHILE */
 
     /* USER CODE BEGIN 3 */
@@ -181,10 +211,7 @@ void SystemClock_Config(void)
   }
   /** Initializes the peripherals clocks 
   */
-  PeriphClkInit.PeriphClockSelection = RCC_PERIPHCLK_RTC|RCC_PERIPHCLK_TIM15
-                              |RCC_PERIPHCLK_TIM1;
-  PeriphClkInit.Tim1ClockSelection = RCC_TIM1CLKSOURCE_PCLK1;
-  PeriphClkInit.Tim15ClockSelection = RCC_TIM15CLKSOURCE_PCLK1;
+  PeriphClkInit.PeriphClockSelection = RCC_PERIPHCLK_RTC;
   PeriphClkInit.RTCClockSelection = RCC_RTCCLKSOURCE_LSE;
 
   if (HAL_RCCEx_PeriphCLKConfig(&PeriphClkInit) != HAL_OK)

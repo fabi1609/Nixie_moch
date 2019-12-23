@@ -53,7 +53,7 @@ void HAL_TIM_PeriodElapsedCallback (TIM_HandleTypeDef *htim)
 	}
 
 	//DCF77
-	else if(htim->Instance == htim1.Instance)
+	else if(htim->Instance == htim16.Instance)
 	{
 		dcf77_ms_counter++;
 		if(dcf77_ms_counter>=1000) {
@@ -157,13 +157,13 @@ static void nixie_display()
 	{
 		//HAL_GPIO_WritePin(GDOT_GPIO_Port, GDOT_Pin, GPIO_PIN_SET);
 		//Workaround: use LL library and use pullup oder -down resistor instaed of output
-		LL_GPIO_SetPinPull(GDOT_GPIO_Port, GDOT_Pin, GPIO_PULLUP);
+		//LL_GPIO_SetPinPull(GDOT_GPIO_Port, GDOT_Pin, GPIO_PULLUP);
 	}
 	else
 	{
 		//HAL_GPIO_WritePin(GDOT_GPIO_Port, GDOT_Pin, GPIO_PIN_RESET);
 		//Workaround: use LL library and use pullup oder -down resistor instaed of output
-		LL_GPIO_SetPinPull(GDOT_GPIO_Port, GDOT_Pin, GPIO_PULLDOWN);
+		//LL_GPIO_SetPinPull(GDOT_GPIO_Port, GDOT_Pin, GPIO_PULLDOWN);
 	}
 }
 
@@ -234,7 +234,7 @@ void UB_DCF77_Init(void)
   DCF77_TIME.monat=0;
   DCF77_TIME.jahr=0;
 
-  HAL_TIM_Base_Start_IT(&htim1);
+  HAL_TIM_Base_Start_IT(&htim16);
 }
 
 
@@ -256,12 +256,15 @@ DCF77_Status_t UB_DCF77_ReadTime(void)
   else {
     if((dcf77_int.mode==M77_Init) || (dcf77_int.mode==M77_Wait4Signal)) {
       ret_wert=DCF77_NO_SIGNAL;
+      LL_GPIO_SetPinPull(GDOT_GPIO_Port, GDOT_Pin, GPIO_PULLDOWN);
     }
     else if(dcf77_int.mode==M77_Error) {
       ret_wert=DCF77_TIME_ERROR;
+      LL_GPIO_SetPinPull(GDOT_GPIO_Port, GDOT_Pin, GPIO_PULLDOWN);
     }
     else {
       ret_wert=DCF77_READING;
+      LL_GPIO_SetPinPull(GDOT_GPIO_Port, GDOT_Pin, GPIO_PULLUP);
     }
   }
 
@@ -353,37 +356,47 @@ void P_Store_Value(uint8_t value, uint8_t pos)
 //--------------------------------------------------------------
 // ISR (Exti-0) [Lo+Hi-Flanke]
 //--------------------------------------------------------------
-void HAL_GPIO_EXTI_Callback(uint16_t GPIO_Pin)
+void EXTI2_3_IRQHandler(void)
 {
-  GPIO_PinState wert;
-  uint32_t signal_value=0;
-  static uint8_t pos=0;
+	  GPIO_PinState wert;
+	  uint32_t signal_value=0;
+	  static uint8_t pos=0;
 
-  wert=HAL_GPIO_ReadPin(DCF77_GPIO_Port, DCF77_Pin);
-  if(wert==GPIO_PIN_RESET) {
-    // lo Flanke
-    signal_value=dcf77_1ms_value;
-    if(dcf77_int.mode==M77_Wait4Time) {
-      if((signal_value>=DCF77_LO_MIN) && (signal_value<=DCF77_LO_MAX)) {
-        P_Store_Value(0,pos);
-        pos++;
-        if(dcf77_int.mode==M77_Ready) dcf77_int.mode=M77_Wait4Sync;
-      }
-      else if((signal_value>=DCF77_HI_MIN) && (signal_value<=DCF77_HI_MAX)) {
-        P_Store_Value(1,pos);
-        pos++;
-        if(dcf77_int.mode==M77_Ready) dcf77_int.mode=M77_Wait4Sync;
-      }
-      else dcf77_int.mode=M77_Error;
-    }
+	  wert=HAL_GPIO_ReadPin(DCF77_GPIO_Port, DCF77_Pin);
+	  if(wert==GPIO_PIN_RESET) {
+	    // lo Flanke
+	    signal_value=dcf77_1ms_value;
+	    if(dcf77_int.mode==M77_Wait4Time) {
+	      if((signal_value>=DCF77_LO_MIN) && (signal_value<=DCF77_LO_MAX)) {
+	        P_Store_Value(0,pos);
+	        pos++;
+	        if(dcf77_int.mode==M77_Ready) dcf77_int.mode=M77_Wait4Sync;
+	      }
+	      else if((signal_value>=DCF77_HI_MIN) && (signal_value<=DCF77_HI_MAX)) {
+	        P_Store_Value(1,pos);
+	        pos++;
+	        if(dcf77_int.mode==M77_Ready) dcf77_int.mode=M77_Wait4Sync;
+	      }
+	      else dcf77_int.mode=M77_Error;
+	    }
+	  }
+	  else {
+	    // hi Flanke
+	    dcf77_1ms_value=0;
+	    if(dcf77_int.mode==M77_SyncOk) {
+	      pos=0;
+	      dcf77_int.mode=M77_Wait4Time;
+	    }
+	    if((dcf77_int.mode==M77_Wait4Signal) || (dcf77_int.mode==M77_Error)) dcf77_int.mode=M77_Wait4Sync;
+	  }
+
+  if (LL_EXTI_IsActiveFallingFlag_0_31(LL_EXTI_LINE_2) != RESET)
+  {
+    LL_EXTI_ClearFallingFlag_0_31(LL_EXTI_LINE_2);
   }
-  else {
-    // hi Flanke
-    dcf77_1ms_value=0;
-    if(dcf77_int.mode==M77_SyncOk) {
-      pos=0;
-      dcf77_int.mode=M77_Wait4Time;
-    }
-    if((dcf77_int.mode==M77_Wait4Signal) || (dcf77_int.mode==M77_Error)) dcf77_int.mode=M77_Wait4Sync;
+  if (LL_EXTI_IsActiveRisingFlag_0_31(LL_EXTI_LINE_2) != RESET)
+  {
+    LL_EXTI_ClearRisingFlag_0_31(LL_EXTI_LINE_2);
   }
 }
+

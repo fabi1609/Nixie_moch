@@ -175,6 +175,12 @@ void MX_GPIO_Init(void)
   LL_GPIO_Init(GPIOF, &GPIO_InitStruct);
 
   /**/
+  GPIO_InitStruct.Pin = NRST_Pin;
+  GPIO_InitStruct.Mode = LL_GPIO_MODE_INPUT;
+  GPIO_InitStruct.Pull = LL_GPIO_PULL_UP;
+  LL_GPIO_Init(NRST_GPIO_Port, &GPIO_InitStruct);
+
+  /**/
   GPIO_InitStruct.Pin = GN1_Pin;
   GPIO_InitStruct.Mode = LL_GPIO_MODE_OUTPUT;
   GPIO_InitStruct.Speed = LL_GPIO_SPEED_FREQ_LOW;
@@ -437,7 +443,7 @@ void MX_GPIO_Init(void)
   LL_GPIO_Init(G7_GPIO_Port, &GPIO_InitStruct);
 
   /**/
-  LL_EXTI_SetEXTISource(LL_EXTI_CONFIG_PORTF, LL_EXTI_CONFIG_LINE2);
+  LL_EXTI_SetEXTISource(LL_EXTI_CONFIG_PORTA, LL_EXTI_CONFIG_LINE2);
 
   /**/
   EXTI_InitStruct.Line_0_31 = LL_EXTI_LINE_2;

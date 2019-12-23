@@ -69,15 +69,15 @@ void Error_Handler(void);
 /* Private defines -----------------------------------------------------------*/
 #define S2_Pin LL_GPIO_PIN_13
 #define S2_GPIO_Port GPIOC
-#define DCF77_Pin LL_GPIO_PIN_2
-#define DCF77_GPIO_Port GPIOF
-#define DCF77_EXTI_IRQn EXTI2_3_IRQn
+#define NRST_Pin LL_GPIO_PIN_2
+#define NRST_GPIO_Port GPIOF
 #define GN1_Pin LL_GPIO_PIN_0
 #define GN1_GPIO_Port GPIOA
 #define GN2_Pin LL_GPIO_PIN_1
 #define GN2_GPIO_Port GPIOA
-#define LS_Pin LL_GPIO_PIN_2
-#define LS_GPIO_Port GPIOA
+#define DCF77_Pin LL_GPIO_PIN_2
+#define DCF77_GPIO_Port GPIOA
+#define DCF77_EXTI_IRQn EXTI2_3_IRQn
 #define FB_170V_Pin LL_GPIO_PIN_3
 #define FB_170V_GPIO_Port GPIOA
 #define G1_Pin LL_GPIO_PIN_4
