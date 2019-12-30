@@ -134,7 +134,9 @@ int main(void)
   nixie_init();
   UB_DCF77_Init();
   DCF77_Status_t status;
-  uint8_t old_sek=99;
+  uint8_t old_h=99;
+  uint8_t old_min=99;
+  uint8_t dcf77_readout=0;
   /* USER CODE END 2 */
 
   /* Infinite loop */
@@ -145,15 +147,54 @@ int main(void)
 	  status=UB_DCF77_ReadTime();
 	  if(status==DCF77_TIME_OK)
 	  {
-		  if(DCF77_TIME.sek!=old_sek)
+		  switch(dcf77_readout)
 		  {
-			  old_sek=DCF77_TIME.sek;
-			  sTime1.SecondFraction = 0;
-			  sTime1.Seconds = DCF77_TIME.sek;
-			  sTime1.Minutes = DCF77_TIME.min;
-			  sTime1.Hours = DCF77_TIME.std;
-			  HAL_RTC_SetTime(&hrtc, &sTime1, RTC_FORMAT_BIN);
-			  HAL_RTC_SetDate(&hrtc, &sDate1, RTC_FORMAT_BIN);
+		  case 0:
+			  //LL_GPIO_SetPinPull(GDOT_GPIO_Port, GDOT_Pin, GPIO_PULLUP);
+			  old_h=DCF77_TIME.std;
+			  old_min=DCF77_TIME.min;
+			  //dcf77_readout=1;
+			  dcf77_readout=2;
+			  UB_DCF77_Init();
+			  break;
+		  case 1:
+			  //LL_GPIO_SetPinPull(GDOT_GPIO_Port, GDOT_Pin, GPIO_PULLUP);
+			  if(old_min<55)
+			  {
+				  if(old_h==DCF77_TIME.std && (old_min+5)>=DCF77_TIME.min && old_min<=DCF77_TIME.min)
+				  {
+					  old_h=DCF77_TIME.std;
+					  old_min=DCF77_TIME.min;
+					  dcf77_readout=2;
+				  }
+				  else
+				  {
+					  dcf77_readout=0;
+				  }
+			  }
+			  else
+			  {
+				  dcf77_readout=0;
+			  }
+			  UB_DCF77_Init();
+			  break;
+		  case 2:
+			  if(old_min<55)
+			  {
+				  if(old_h==DCF77_TIME.std && (old_min+5)>=DCF77_TIME.min && old_min<=DCF77_TIME.min)
+				  {
+					  sTime1.SecondFraction = 0;
+					  sTime1.Seconds = DCF77_TIME.sek;
+					  sTime1.Minutes = DCF77_TIME.min;
+					  sTime1.Hours = DCF77_TIME.std;
+					  HAL_RTC_SetTime(&hrtc, &sTime1, RTC_FORMAT_BIN);
+					  HAL_RTC_SetDate(&hrtc, &sDate1, RTC_FORMAT_BIN);
+					  //LL_GPIO_SetPinPull(GDOT_GPIO_Port, GDOT_Pin, GPIO_PULLUP);
+				  }
+			  }
+			  dcf77_readout=0;
+			  UB_DCF77_Init();
+			  break;
 		  }
 	  }
     /* USER CODE END WHILE */

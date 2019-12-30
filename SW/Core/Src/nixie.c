@@ -28,9 +28,9 @@ DCF77_interal_t dcf77_int;
 static void nixie_display();
 static void nixie_display_reset_all();
 static void nixie_display_set_anode(uint8_t n);
-
 //DCF77
 void P_Store_Value(uint8_t value, uint8_t pos);
+
 
 void HAL_TIM_PeriodElapsedCallback (TIM_HandleTypeDef *htim)
 {
@@ -157,13 +157,13 @@ static void nixie_display()
 	{
 		//HAL_GPIO_WritePin(GDOT_GPIO_Port, GDOT_Pin, GPIO_PIN_SET);
 		//Workaround: use LL library and use pullup oder -down resistor instaed of output
-		//LL_GPIO_SetPinPull(GDOT_GPIO_Port, GDOT_Pin, GPIO_PULLUP);
+		LL_GPIO_SetPinPull(GDOT_GPIO_Port, GDOT_Pin, GPIO_PULLUP);
 	}
 	else
 	{
 		//HAL_GPIO_WritePin(GDOT_GPIO_Port, GDOT_Pin, GPIO_PIN_RESET);
 		//Workaround: use LL library and use pullup oder -down resistor instaed of output
-		//LL_GPIO_SetPinPull(GDOT_GPIO_Port, GDOT_Pin, GPIO_PULLDOWN);
+		LL_GPIO_SetPinPull(GDOT_GPIO_Port, GDOT_Pin, GPIO_PULLDOWN);
 	}
 }
 
@@ -256,15 +256,15 @@ DCF77_Status_t UB_DCF77_ReadTime(void)
   else {
     if((dcf77_int.mode==M77_Init) || (dcf77_int.mode==M77_Wait4Signal)) {
       ret_wert=DCF77_NO_SIGNAL;
-      LL_GPIO_SetPinPull(GDOT_GPIO_Port, GDOT_Pin, GPIO_PULLDOWN);
+      //LL_GPIO_SetPinPull(GDOT_GPIO_Port, GDOT_Pin, GPIO_PULLDOWN);
     }
     else if(dcf77_int.mode==M77_Error) {
       ret_wert=DCF77_TIME_ERROR;
-      LL_GPIO_SetPinPull(GDOT_GPIO_Port, GDOT_Pin, GPIO_PULLDOWN);
+      //LL_GPIO_SetPinPull(GDOT_GPIO_Port, GDOT_Pin, GPIO_PULLDOWN);
     }
     else {
       ret_wert=DCF77_READING;
-      LL_GPIO_SetPinPull(GDOT_GPIO_Port, GDOT_Pin, GPIO_PULLUP);
+      //LL_GPIO_SetPinPull(GDOT_GPIO_Port, GDOT_Pin, GPIO_PULLUP);
     }
   }
 
