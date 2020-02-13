@@ -96,7 +96,6 @@ int main(void)
   MX_DAC1_Init();
   MX_TIM2_Init();
   MX_TIM14_Init();
-  MX_TIM15_Init();
   /* USER CODE BEGIN 2 */
   MY_OWN_MX_RTC_Init();
   //MX_RTC_Init();
@@ -163,8 +162,7 @@ void SystemClock_Config(void)
   }
   /** Initializes the peripherals clocks 
   */
-  PeriphClkInit.PeriphClockSelection = RCC_PERIPHCLK_RTC|RCC_PERIPHCLK_TIM15;
-  PeriphClkInit.Tim15ClockSelection = RCC_TIM15CLKSOURCE_PCLK1;
+  PeriphClkInit.PeriphClockSelection = RCC_PERIPHCLK_RTC;
   PeriphClkInit.RTCClockSelection = RCC_RTCCLKSOURCE_LSE;
 
   if (HAL_RCCEx_PeriphCLKConfig(&PeriphClkInit) != HAL_OK)
