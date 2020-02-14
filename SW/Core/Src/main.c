@@ -96,6 +96,7 @@ int main(void)
   MX_DAC1_Init();
   MX_TIM2_Init();
   MX_TIM14_Init();
+  MX_TIM17_Init();
   /* USER CODE BEGIN 2 */
   MY_OWN_MX_RTC_Init();
   //MX_RTC_Init();

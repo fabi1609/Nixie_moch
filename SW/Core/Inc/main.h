@@ -75,6 +75,7 @@ void Error_Handler(void);
 #define GN1_GPIO_Port GPIOA
 #define ESP01_Pin LL_GPIO_PIN_1
 #define ESP01_GPIO_Port GPIOA
+#define ESP01_EXTI_IRQn EXTI0_1_IRQn
 #define GN2_Pin LL_GPIO_PIN_2
 #define GN2_GPIO_Port GPIOA
 #define FB_170V_Pin LL_GPIO_PIN_3
