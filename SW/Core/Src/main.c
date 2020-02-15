@@ -101,6 +101,7 @@ int main(void)
   MY_OWN_MX_RTC_Init();
   //MX_RTC_Init();
   nixie_init();
+  ESP01_init();
   /* USER CODE END 2 */
 
   /* Infinite loop */
