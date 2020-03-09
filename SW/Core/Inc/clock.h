@@ -12,5 +12,6 @@
 #include "stm32g0xx_ll_system.h"
 
 void ESP01_init();
+void OWN_LL_EXTI();
 
 #endif /* INC_CLOCK_H_ */

@@ -23,6 +23,7 @@
 #include "stm32g0xx_it.h"
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
+#include "clock.h"
 /* USER CODE END Includes */
 
 /* Private typedef -----------------------------------------------------------*/
@@ -167,7 +168,7 @@ void EXTI0_1_IRQHandler(void)
   {
     LL_EXTI_ClearFallingFlag_0_31(LL_EXTI_LINE_1);
     /* USER CODE BEGIN LL_EXTI_LINE_1_FALLING */
-    
+    OWN_LL_EXTI();
     /* USER CODE END LL_EXTI_LINE_1_FALLING */
   }
   /* USER CODE BEGIN EXTI0_1_IRQn 1 */

@@ -55,11 +55,12 @@ void HAL_RTC_AlarmAEventCallback(RTC_HandleTypeDef *hrtc)
 void ESP01_init()
 {
 	HAL_TIM_Base_Start(&htim17);
+
 }
 
 //get time from ESP01 Board
 //trigger on falling edge
-void HAL_GPIO_EXTI_Callback(uint16_t GPIO_Pin)
+void OWN_LL_EXTI()
 {
 	switch(ESP01_state)
 	{
