@@ -106,7 +106,7 @@ static void nixie_display()
 		break;
 	}
 
-	/*TODO: PA4 and PA5 can’t be used in output mode when DAC1_OUT1 or
+	/*TODO: Errata Workaround: PA4 and PA5 can’t be used in output mode when DAC1_OUT1 or
 	DAC1_OUT2 respectively is connected to on-chip peripherals*/
 	if(seconds%2)
 	{

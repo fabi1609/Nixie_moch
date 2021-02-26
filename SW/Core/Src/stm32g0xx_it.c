@@ -168,8 +168,15 @@ void EXTI0_1_IRQHandler(void)
   {
     LL_EXTI_ClearFallingFlag_0_31(LL_EXTI_LINE_1);
     /* USER CODE BEGIN LL_EXTI_LINE_1_FALLING */
-    OWN_LL_EXTI();
+    OWN_LL_EXTI(0);
     /* USER CODE END LL_EXTI_LINE_1_FALLING */
+  }
+  else if (LL_EXTI_IsActiveRisingFlag_0_31(LL_EXTI_LINE_1) != RESET)
+  {
+	LL_EXTI_ClearRisingFlag_0_31(LL_EXTI_LINE_1);
+	/* USER CODE BEGIN LL_EXTI_LINE_1_FALLING */
+	OWN_LL_EXTI(1);
+	/* USER CODE END LL_EXTI_LINE_1_FALLING */
   }
   /* USER CODE BEGIN EXTI0_1_IRQn 1 */
 

@@ -12,6 +12,6 @@
 #include "stm32g0xx_ll_system.h"
 
 void ESP01_init();
-void OWN_LL_EXTI();
+void OWN_LL_EXTI(uint8_t ulGpioState);
 
 #endif /* INC_CLOCK_H_ */
