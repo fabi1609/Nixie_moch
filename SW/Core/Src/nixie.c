@@ -6,6 +6,7 @@
  */
 
 #include "nixie.h"
+#include "settings.h"
 #include <stdbool.h>
 #include "comp.h"
 #include "tim.h"

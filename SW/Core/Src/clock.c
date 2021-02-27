@@ -7,6 +7,7 @@
 
 #include "clock.h"
 #include "nixie.h"
+#include "settings.h"
 #include "gpio.h"
 #include "tim.h"
 #include "rtc.h"
@@ -46,6 +47,12 @@ void HAL_RTC_AlarmAEventCallback(RTC_HandleTypeDef *hrtc)
 		}
 		HAL_RTC_SetTime(hrtc, &sTime1, RTC_FORMAT_BIN);
 		HAL_RTC_SetDate(hrtc, &sDate1, RTC_FORMAT_BIN);
+	}
+
+	//Scheduled Reset
+	if(sTime1.Hours == CLOCK_RESET_TIME_H && sTime1.Minutes == CLOCK_RESET_TIME_M && sTime1.Seconds == 0)
+	{
+		HAL_NVIC_SystemReset();
 	}
 
 	//Display Time
