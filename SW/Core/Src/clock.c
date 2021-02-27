@@ -70,21 +70,27 @@ void OWN_LL_EXTI(uint8_t ulGpioState)
 {
 	uint16_t minutes = 0;
 
-	if(ulGpioState)
+	if(hrtc.State == HAL_RTC_STATE_READY)
 	{
-		//Read Time on rising edge
+		if(ulGpioState)
+			{
+				//Read Time on rising edge
 
-		minutes = (__HAL_TIM_GET_COUNTER(&htim17) / 10);
-		sTime1.Hours = minutes / 60;
-		minutes -= (sTime1.Hours * 60);
-		sTime1.Minutes = minutes;
+				minutes = (__HAL_TIM_GET_COUNTER(&htim17) / 10);
+				sTime1.Hours = minutes / 60;
+				minutes -= (sTime1.Hours * 60);
+				sTime1.Minutes = minutes;
+				sTime1.Seconds = 0;
+				sTime1.SecondFraction = 0;
+				sTime1.SubSeconds = 0;
 
-		HAL_RTC_SetTime(&hrtc, &sTime1, RTC_FORMAT_BIN);
-		HAL_RTC_SetDate(&hrtc, &sDate1, RTC_FORMAT_BIN);
-	}
-	else
-	{
-		//Set Counter to 0 on falling edge
-		__HAL_TIM_SetCounter(&htim17, 0); //TIM17 counts with 1000 Hz
+				HAL_RTC_SetTime(&hrtc, &sTime1, RTC_FORMAT_BIN);
+				HAL_RTC_SetDate(&hrtc, &sDate1, RTC_FORMAT_BIN);
+			}
+			else
+			{
+				//Set Counter to 0 on falling edge
+				__HAL_TIM_SetCounter(&htim17, 0); //TIM17 counts with 1000 Hz
+			}
 	}
 }
