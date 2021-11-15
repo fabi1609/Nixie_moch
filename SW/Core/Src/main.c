@@ -78,6 +78,7 @@ int main(void)
 
   /* Reset of all peripherals, Initializes the Flash interface and the Systick. */
   HAL_Init();
+  HAL_Delay(1000);
 
   /* USER CODE BEGIN Init */
 
@@ -96,11 +97,12 @@ int main(void)
   MX_DAC1_Init();
   MX_TIM2_Init();
   MX_TIM14_Init();
-  MX_TIM15_Init();
+  MX_TIM17_Init();
   /* USER CODE BEGIN 2 */
   MY_OWN_MX_RTC_Init();
   //MX_RTC_Init();
   nixie_init();
+  ESP01_init();
   /* USER CODE END 2 */
 
   /* Infinite loop */
@@ -163,8 +165,7 @@ void SystemClock_Config(void)
   }
   /** Initializes the peripherals clocks 
   */
-  PeriphClkInit.PeriphClockSelection = RCC_PERIPHCLK_RTC|RCC_PERIPHCLK_TIM15;
-  PeriphClkInit.Tim15ClockSelection = RCC_TIM15CLKSOURCE_PCLK1;
+  PeriphClkInit.PeriphClockSelection = RCC_PERIPHCLK_RTC;
   PeriphClkInit.RTCClockSelection = RCC_RTCCLKSOURCE_LSE;
 
   if (HAL_RCCEx_PeriphCLKConfig(&PeriphClkInit) != HAL_OK)

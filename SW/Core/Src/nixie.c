@@ -6,6 +6,7 @@
  */
 
 #include "nixie.h"
+#include "settings.h"
 #include <stdbool.h>
 #include "comp.h"
 #include "tim.h"
@@ -39,7 +40,7 @@ void HAL_TIM_PeriodElapsedCallback (TIM_HandleTypeDef *htim)
 		//ramp up feedback voltage for boost converter
 		if(dac_value < DAC_TARGET)
 		{
-			dac_value = dac_value + 10;
+			dac_value = dac_value + 5;
 			HAL_DAC_SetValue(&hdac1, DAC_CHANNEL_2, DAC_ALIGN_12B_R, dac_value);
 		}
 	}
